@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# instala o arch-install-scripts
+cd /tmp ; wget https://www.archlinux.org/packages/extra/any/arch-install-scripts/download/ -O arch-install.pkg.tar.xz ; tar -xf arch-install.pkg.tar.xz ; sudo cp usr/bin/arch-chroot usr/bin/genfstab /usr/local/bin ; sudo chmod +x /usr/local/bin/*
+cd $HOME
+exit
