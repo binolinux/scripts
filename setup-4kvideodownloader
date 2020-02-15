@@ -2,8 +2,9 @@
 
 # Instala 4K Videodownloader
 sudo rm -rf /opt/4kvideodownloader /usr/share/applications/4kvideodownloader.desktop
-cd /tmp ; wget "https://dl.4kdownload.com/app/4kvideodownloader_4.10.1_amd64.tar.bz2" -O 4kvideodownloader.tar.bz2
-sudo tar -jxvf 4kvideodownloader.tar.bz2 -C /opt/
+cd /tmp ; wget "https://dl.4kdownload.com/app/4kvideodownloader_4.11.3_amd64.tar.bz2" -O 4kvideodownloader.tar.bz2
+wget https://github.com/binolinux/misc/blob/master/icons/4kvideodownloader.png
+sudo tar -jxvf 4kvideodownloader.tar.bz2 -C /opt/ ; sudo cp 4kvideodownloader.png /usr/share/icons/
 sudo sh -c 'echo -e "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nName=4K Video Downloader\nExec=/opt/4kvideodownloader/4kvideodownloader.sh\nIcon=/usr/share/icons/4kvideodownloader.png\nTerminal=false\nType=Application\nCategories=Network;" > /usr/share/applications/4kvideodownloader.desktop'
 
 exit
