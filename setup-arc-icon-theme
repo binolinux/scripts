@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# instala arc-icon-theme + moka
+cd /tmp ; wget https://www.archlinux.org/packages/community/any/arc-icon-theme/download/ -O arc-icon-theme.pkg.tar.xz ; wget https://www.archlinux.org/packages/community/any/moka-icon-theme/download/ -O moka.pkg.tar.xz
+tar xf arc-icon-theme.pkg.tar.xz ; tar xf moka.pkg.tar.xz
+sudo chmod 755 -R ./usr ; sudo chown root:root ./usr ; sudo mv ./usr/share/icons/* /usr/share/icons/
+sudo sed -i 's/Moka,Faba/Moka,Papirus-Dark,Faba/' /usr/share/icons/Arc/index.theme
+sudo gtk-update-icon-cache /usr/share/icons/Arc ; sudo gtk-update-icon-cache /usr/share/icons/Moka
+cd $HOME
+

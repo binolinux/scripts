@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# instala papirus icon theme
+
+cd /tmp ; sudo wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install.sh | sh
+sudo wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/install.sh | sh
+sudo papirus-folders --color teal
+cd $HOME
+exit

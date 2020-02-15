@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# instala jDownloader
+sudo rm -rf /opt/jDownloader /usr/share/applications/jdownloader.desktop /tmp/jdownloader.7z*
+cd /tmp ; wget https://github.com/binolinux/applications/raw/master/jdownloader/jdownloader.7z.001 ; wget https://github.com/binolinux/applications/raw/master/jdownloader/jdownloader.7z.002
+wget https://github.com/binolinux/applications/raw/master/jdownloader/jdownloader.7z.003 ; wget https://github.com/binolinux/applications/raw/master/jdownloader/jdownloader.7z.004
+7z x -y -p835174 jdownloader.7z.001 ; sudo mv ./jDownloader /opt/ ; sudo cp /opt/jDownloader/jdownloader.desktop /usr/share/applications/
+sudo ln -sf /opt/jDownloader/jre/bin/java /usr/local/bin ; echo -e '#!/bin/bash \njava -jar /opt/jDownloader/JDownloader.jar' | sudo tee /usr/local/bin/jdownloader
+sudo chmod +x /usr/local/bin/jdownloader ; sudo chown -R $USER:root /opt/jDownloader ; sudo chown -R ${USER}:root /opt/jDownloader ; clear
+cd $HOME
+exit

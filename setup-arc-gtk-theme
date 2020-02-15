@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# instala arc-gtk-theme
+sudo rm -rf /usr/share/themes/Arc /usr/share/themes/Arc-Dark /usr/share/themes/Arc-Darker
+cd /tmp ; wget https://www.archlinux.org/packages/community/any/arc-gtk-theme/download/ -O arc-gtk-theme.pkg.tar.xz
+tar xf arc-gtk-theme.pkg.tar.xz ; sudo chmod 755 -R /tmp/usr/share/themes ; sudo chown -R root:root /tmp/usr/share/themes ; sudo mv /tmp/usr/share/themes/* /usr/share/themes
+cd $HOME
+exit
