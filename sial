@@ -14,7 +14,7 @@ trap '' INT TSTP
 clear ; echo -n 'Digite o nome do usuario: ' ; read nnu
 echo
 echo -n 'Digite um nome para a maquina (hostname): ' ; read nmq
-
+clear
 echo -e '\nDesktop Environment\n-------------------\n\n1) XFCE\t\t2) Mate\t\t3) Plasma\t4) Cinnamon\t5) Nenhum\n' ; echo -n 'Escolha [1-5]: ' ; read g
 case $g in
     1) setde='xfce4 pulseaudio ristretto thunar-archive-plugin xfce4-clipman-plugin xfce4-notifyd xfce4-pulseaudio-plugin xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin file-roller gnome-calculator' ; mkdir -p /mnt/etc/skel/ ; echo 'exec startxfce4' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
