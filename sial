@@ -88,10 +88,15 @@ sed -i '/%wheel ALL=(ALL) ALL/s/^#//' /mnt/etc/sudoers
 arch-chroot /mnt systemctl enable {dhcpcd,NetworkManager}
 
 if [ -f /mnt/etc/skel/.xinitrc ]; then
-arch-chroot /mnt git clone https://github.com/vinceliuice/Matcha-gtk-theme /tmp/matcha ; cd /tmp/matcha ; sh install.sh -d /usr/share/themes/
-arch-chroot /mnt wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install.sh | sh
-arch-chroot /mnt wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/install.sh | sh
-arch-chroot /mnt papirus-folders --color teal
+cat << EOF > /mnt/temas
+#!/bin/bash
+git clone https://github.com/vinceliuice/Matcha-gtk-theme /tmp/matcha ; cd /tmp/matcha ; sh install.sh -d /usr/share/themes/
+wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install.sh | sh
+wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/install.sh | sh
+papirus-folders --color teal
+EOF
+arch-chroot /mnt sh temas
+rm -f /mnt/temas
 fi
 
 arch-chroot /mnt chown -R $nnu:$nnu /home/$nnu ; arch-chroot /mnt chown -R ${nnu}:${nnu} /home/$nnu
