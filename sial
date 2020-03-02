@@ -23,6 +23,7 @@ case $g in
     4) setde='cinnamon gnome-terminal file-roller eog gnome-calculator' ; mkdir -p /mnt/etc/skel/ ; echo 'exec cinnamon-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
     5) setde=' ' ;;
 esac
+clear
 
 pacstrap /mnt base base-devel linux linux-firmware linux-headers dhcpcd nano grub xorg-server xorg-xinit xorg-xrandr wget git p7zip unrar gvfs ttf-dejavu zsh networkmanager alsa-utils $setde
 
@@ -86,10 +87,12 @@ sed -i '/%wheel ALL=(ALL) ALL/s/^#//' /mnt/etc/sudoers
 
 arch-chroot /mnt systemctl enable {dhcpcd,NetworkManager}
 
+if [ -f /mnt/etc/skel/.xinitrc ]; then
 arch-chroot /mnt git clone https://github.com/vinceliuice/Matcha-gtk-theme /tmp/matcha ; cd /tmp/matcha ; sh install.sh -d /usr/share/themes/
 arch-chroot /mnt wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install.sh | sh
 arch-chroot /mnt wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/install.sh | sh
 arch-chroot /mnt papirus-folders --color teal
+fi
 
 arch-chroot /mnt chown -R $nnu:$nnu /home/$nnu ; arch-chroot /mnt chown -R ${nnu}:${nnu} /home/$nnu
 
