@@ -33,6 +33,7 @@ case $g in
     4) setde="cinnamon gnome-terminal" ; mkdir -p /mnt/etc/skel/ ; echo 'exec cinnamon-session' >> /mnt/etc/skel/.xinitrc ; echo echo 'startx' >> /mnt/etc/skel/.zprofile ;;
     5) setde=" " ;;
 esac
+clear
 
 pacstrap /mnt base base-devel linux linux-firmware linux-headers dhcpcd nano grub xorg-server xorg-xinit xorg-xrandr wget git p7zip unrar gvfs ttf-dejavu zsh networkmanager $setde
 
