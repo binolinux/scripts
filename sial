@@ -75,9 +75,8 @@ arch-chroot /mnt git clone https://github.com/ohmyzsh/ohmyzsh /etc/skel/.oh-my-z
 arch-chroot /mnt git clone https://github.com/zsh-users/zsh-autosuggestions.git /etc/skel/.oh-my-zsh/plugins/zsh-autosuggestions
 arch-chroot /mnt git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /etc/skel/.oh-my-zsh/plugins/zsh-syntax-highlighting
 cp /mnt/etc/skel/.oh-my-zsh/templates/zshrc.zsh-template /mnt/etc/skel/.zshrc
-sed -i 's/en_US/pt_BR/' /mnt/etc/skel/.oh-my-zsh
-sed -i '/pt_BR/s/^#//' /mnt/etc/skel/.oh-my-zsh
-sed -i 's/(git)/(git compleat common-aliases extract zsh-autosuggestions zsh-syntax-highlighting)/' /mnt/etc/skel/.oh-my-zsh
+sed -i 's/en_US/pt_BR/' /mnt/etc/skel/.zshrc ; sed -i '/pt_BR/s/^#//' /mnt/etc/skel/.zshrc
+sed -i 's/(git)/(git compleat common-aliases extract zsh-autosuggestions zsh-syntax-highlighting)/' /mnt/etc/skel/.zshrc
 wget https://github.com/dylanaraps/neofetch/raw/master/neofetch -O /mnt/usr/local/bin/neofetch
 wget https://github.com/KittyKatt/screenFetch/raw/master/screenfetch-dev -O /mnt/usr/local/bin/screenfetch
 wget https://github.com/sivel/speedtest-cli/raw/master/speedtest.py -O /mnt/usr/local/bin/speedtest-cli
