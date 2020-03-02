@@ -25,7 +25,7 @@ echo -e '\nDesktop Environment\n-------------------\n\n1) XFCE\t\t2) Mate\t\t3) 
 case $g in
     1) setde='xfce4 pulseaudio pavucontrol ristretto thunar-archive-plugin xfce4-clipman-plugin xfce4-notifyd xfce4-pulseaudio-plugin xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin file-roller gnome-calculator' ; mkdir -p /mnt/etc/skel/ ; echo 'exec startxfce4' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
     2) setde='mate pulseaudio engrampa eom mate-applets mate-calc mate-media mate-power-manager mate-screensaver mate-system-monitor mate-terminal mate-utils' ; mkdir -p /mnt/etc/skel/ ; echo 'exec mate-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    3) setde='plasma pulseaudio konsole dolphin ark' ; mkdir -p /mnt/etc/skel/ ; echo 'exec startplasma-x11' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
+    3) setde='plasma-desktop kwin plasma-nm kdeplasma-addons plasma-pa breeze breeze-gtk kscreen systemsettings kde-gtk-config kio-extras powerdevil pulseaudio konsole dolphin ark spectacle' ; mkdir -p /mnt/etc/skel/ ; echo 'exec startplasma-x11' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
     4) setde='cinnamon pulseaudio gnome-terminal file-roller eog gnome-calculator' ; mkdir -p /mnt/etc/skel/ ; echo 'exec cinnamon-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
     5) setde=' ' ;;
 esac
