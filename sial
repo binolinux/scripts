@@ -14,11 +14,7 @@ trap '' INT TSTP
 	if [ -d /mnt/var/cache/pacman/pkg ]; then
 	echo ; echo -n 'Deseja reutilizar o cache da instalacao anterior ? [ S ou s = SIM ] ' ; read pcial
 	if [[ $pcial = [sSyY] ]]; then
-	echo -e '\nAguarde... \n'
-	mv /mnt/var/cache/pacman/pkg /mnt/.p
-	rm -rf /mnt/*
-	mkdir -p /mnt/var/cache/pacman
-	mv /mnt/.p /mnt/var/cache/pacman/pkg
+	echo -e '\nAguarde... \n' ; mv /mnt/var/cache/pacman/pkg /mnt/.p ; rm -rf /mnt/* ; mkdir -p /mnt/var/cache/pacman ; mv /mnt/.p /mnt/var/cache/pacman/pkg
 	fi
 	fi
     
