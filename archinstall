@@ -65,26 +65,27 @@ EOF
 
 mkdir -p /mnt/etc/X11/xorg.conf.d/
 cat << EOF > /mnt/etc/X11/xorg.conf.d/01-keyboard-layout.conf
-'Section "InputClass"
+Section "InputClass"
          Identifier "Keyboard Defaults"
          MatchIsKeyboard "yes"
          Option "XkbLayout" "br"
 EndSection
 EOF
 
-clear ; echo 'senha do root: '
+clear ; echo 'senha do root '
 arch-chroot /mnt passwd
+
+arch-chroot /mnt sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+cp -a /mnt/root/.oh-my-zsh /mnt/etc/skel/ ; cp /mnt/root/.oh-my-zsh/templates/zshrc.zsh-template /mnt/etc/skel/.zshrc
 
 arch-chroot /mnt groupadd -r autologin
 arch-chroot /mnt useradd -m -g users -G autologin,wheel,storage,power -s /bin/bash $nn1
 
-clear ; echo 'senha do '$nn1': '
+clear ; echo 'senha do '$nn1' '
 arch-chroot /mnt passwd $nn1
 arch-chroot /mnt chsh -s /bin/zsh $nn1
 
 sed -i '/%wheel ALL=(ALL) ALL/s/^#//' /mnt/etc/sudoers
-
-arch-chroot /mnt -u $nn1 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 arch-chroot /mnt chown -R $nn1:$nn1 /home/$nn1
 
