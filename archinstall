@@ -21,6 +21,8 @@ while true
     fi
 done
 
+trap '' INT TSTP
+
 pacstrap /mnt base base-devel linux linux-firmware linux-headers dhcpcd nano grub xorg-server xorg-xinit xorg-xrandr wget git p7zip unrar gvfs ttf-dejavu zsh networkmanager
 
 sed -i '/pt_BR.UTF-8/,+1 s/^#//' /mnt/etc/locale.gen
