@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Script de instalacao do Arch Linux (SIAL)
+# Script de Instalacao do Arch Linux (SIAL)
 # Contato Telegram: @rocker_raccoon
 # Atualizado: 02/03/2020
 
-clear ; echo -e '\t\t\t\tScript de instalacao do Arch Linux \n\nAtive a particao swap e monte as unidades destino antes de continuar... \n'
+clear ; echo -e '\t\t\t\tScript de Instalacao do Arch Linux \n\nAtive a particao swap e monte as unidades destino antes de continuar... \n'
 
 echo -n 'Continuar? [ S ou s = SIM ] ' ; read yorn
     if [[ $yorn = [sSyY] ]]; then
