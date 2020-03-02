@@ -105,9 +105,11 @@ if [ -f /mnt/etc/skel/.xinitrc ]; then
 cat << EOF > /mnt/temas
 #!/bin/bash
 git clone https://github.com/vinceliuice/Matcha-gtk-theme /tmp/matcha ; cd /tmp/matcha ; sh install.sh -d /usr/share/themes/
+git clone https://github.com/daniruiz/flat-remix-gtk /tmp/flatremix ; mv /tmp/flatremix/Flat* /usr/share/themes/
 wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install.sh | sh
 wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/install.sh | sh
 papirus-folders --color teal
+pacman -S --needed --noconfirm arc-icon-theme moka-icon-theme
 EOF
 arch-chroot /mnt sh temas
 rm -f /mnt/temas
