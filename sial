@@ -90,8 +90,7 @@ chmod +x /mnt/usr/local/bin/*
 cp /mnt/etc/skel/.oh-my-zsh/templates/zshrc.zsh-template /mnt/etc/skel/.zshrc
 sed -i 's/en_US/pt_BR/' /mnt/etc/skel/.oh-my-zsh
 sed -i '/pt_BR/s/^#//' /mnt/etc/skel/.oh-my-zsh
-
-sed -i 's/(git)/(git compleat common-aliases extract zsh-autosuggestions zsh-syntax-highlighting)/'
+sed -i 's/(git)/(git compleat common-aliases extract zsh-autosuggestions zsh-syntax-highlighting)/' /mnt/etc/skel/.oh-my-zsh
 
 clear ; echo 'senha do root '
 arch-chroot /mnt passwd
