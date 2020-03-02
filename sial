@@ -17,9 +17,8 @@ trap '' INT TSTP
 	echo -e '\nAguarde... \n' ; mv /mnt/var/cache/pacman/pkg /mnt/.p ; rm -rf /mnt/* ; mkdir -p /mnt/var/cache/pacman ; mv /mnt/.p /mnt/var/cache/pacman/pkg
 	fi
 	fi
-    
 
-echo -e "\nRegiao\n------\n\n1) Rio_Branco\t\t\t2) Manaus\t\t\t3) Sao_Paulo\t\t4)Noronha" ; echo -n "Escolha [1-4]: " ; read g
+echo -e '\nRegiao\n------\n\n1) Rio_Branco\t\t\t2) Manaus\t\t\t3) Sao_Paulo\t\t4)Noronha\n' ; echo -n "Escolha [1-4]: " ; read g
 case $g in
     1) fshz='Rio_Branco' ;; 2) fshz='Rio_Branco' ;; 3) fshz='Sao_Paulo' ;; 4) fshz='Noronha' ;;
 esac
