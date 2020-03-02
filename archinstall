@@ -35,6 +35,9 @@ case $g in
     3) break ;;
 esac
 
+
+echo "archlinux" > /mnt/etc/hostname
+
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime
 
 #outras opcoes
