@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script de Instalacao do Arch Linux (SIAL)
+# Script de Instalacao do Arch Linux
 # Contato Telegram: @rocker_raccoon
 # Atualizado: 02/03/2020
 
@@ -18,16 +18,22 @@ trap '' INT TSTP
 	fi
 	fi
     
+
+echo -e "\nRegiao\n------\n\n1) Rio_Branco\t\t\t2) Manaus\t\t\t3) Sao_Paulo\t\t4)Noronha" ; echo -n "Escolha [1-4]: " ; read g
+case $g in
+    1) fshz='Rio_Branco' ;; 2) fshz='Rio_Branco' ;; 3) fshz='Sao_Paulo' ;; 4) fshz='Noronha' ;;
+esac
+
 echo -n 'Digite o nome do usuario: ' ; read nnu ; echo
 echo -n 'Digite um nome para a maquina (hostname): ' ; read nmq
-clear
-echo -e '\nDesktop Environment\n-------------------\n\n1) XFCE\t\t2) Mate\t\t3) Plasma\t4) Cinnamon\t5) Nenhum\n' ; echo -n 'Escolha [1-5]: ' ; read g
+clear ; echo -e '\nDesktop Environment\n-------------------\n\n1) XFCE\t\t\t2) Mate\t\t\t3) Plasma\n4) Cinnamon\t\t5) Gnome\t\t6) Nenhum\n' ; echo -n 'Escolha [1-6]: ' ; read g
 case $g in
-    1) setde='xfce4 pulseaudio pavucontrol ristretto thunar-archive-plugin xfce4-clipman-plugin xfce4-notifyd xfce4-pulseaudio-plugin xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin file-roller gnome-calculator' ; mkdir -p /mnt/etc/skel/ ; echo 'exec startxfce4' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    2) setde='mate pulseaudio engrampa eom mate-applets mate-calc mate-media mate-power-manager mate-screensaver mate-system-monitor mate-terminal mate-utils' ; mkdir -p /mnt/etc/skel/ ; echo 'exec mate-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    3) setde='plasma-desktop kwin plasma-nm kdeplasma-addons plasma-pa breeze breeze-gtk kscreen systemsettings kde-gtk-config kio-extras powerdevil pulseaudio konsole dolphin ark spectacle' ; mkdir -p /mnt/etc/skel/ ; echo 'exec startplasma-x11' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    4) setde='cinnamon pulseaudio gnome-terminal file-roller eog gnome-calculator' ; mkdir -p /mnt/etc/skel/ ; echo 'exec cinnamon-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    5) setde=' ' ;;
+    1) setde='xfce4 pulseaudio pavucontrol ristretto thunar-archive-plugin xfce4-clipman-plugin xfce4-notifyd xfce4-pulseaudio-plugin xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin file-roller gnome-calculator network-manager-applet' ; mkdir -p /mnt/etc/skel/ ; echo -e 'export XDG_SESSION_TYPE=x11 \nexec startxfce4' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ; touch /mnt/.gtk ;;
+    2) setde='mate pulseaudio engrampa eom mate-applets mate-calc mate-media mate-power-manager mate-screensaver mate-system-monitor mate-terminal mate-utils network-manager-applet' ; mkdir -p /mnt/etc/skel/ ; echo -e 'export XDG_SESSION_TYPE=x11 \nexec mate-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ; touch /mnt/.gtk ;;
+    3) setde='plasma-desktop kwin plasma-nm kdeplasma-addons plasma-pa breeze breeze-gtk kscreen systemsettings kde-gtk-config kio-extras powerdevil pulseaudio konsole dolphin ark spectacle' ; mkdir -p /mnt/etc/skel/ ; echo -e 'export XDG_SESSION_TYPE=x11 \nexec startplasma-x11' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
+    4) setde='cinnamon pulseaudio gnome-terminal file-roller eog gnome-calculator gnome-screenshot gnome-backgrounds gnome-disk-utility network-manager-applet' ; mkdir -p /mnt/etc/skel/ ; echo -e 'export XDG_SESSION_TYPE=x11 \nexec cinnamon-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ; touch /mnt/.gtk ;;
+    5) setde='gnome-terminal gnome-backgrounds gnome-control-center gnome-menus gnome-screensaver gnome-session gnome-settings-daemon gnome-shell gnome-disk-utility gnome-shell-extensions gnome-tweaks gnome-calculator mutter eog nautilus network-manager-applet file-roller gnome-screenshot' ; mkdir -p /mnt/etc/skel/ ; echo -e 'export XDG_SESSION_TYPE=x11 \nexport GDK_BACKEND=x11 \nexec gnome-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ; touch /mnt/.gtk ;;
+    6) setde=' ' ;;
 esac
 
 echo -e "\nProcessador\n-----------\n\n1) AMD\t\t\t2) Intel\t\t\t3) Nao definir\n" ; echo -n "Escolha [1-3]: " ; read g
@@ -36,7 +42,7 @@ case $g in
 esac
 clear
 
-pacstrap /mnt base base-devel linux linux-firmware linux-headers dhcpcd nano grub xorg-server xorg-xinit xorg-xrandr wget git p7zip unrar gvfs ttf-dejavu zsh networkmanager alsa-utils $setde $drpc
+pacstrap /mnt base base-devel linux linux-firmware linux-headers dhcpcd nano grub xorg-server xorg-xinit xorg-xrandr wget git p7zip unrar gvfs ttf-dejavu zsh networkmanager xdg-user-dirs alsa-utils $setde $drpc
 
 mkdir -p /mnt/etc/skel/{"Desktop","Documentos","Downloads","Imagens","Modelos","Música","Público","Vídeos",".bin",".icons",".themes",".fonts"}
 
@@ -48,7 +54,7 @@ echo 'LANG=pt_BR.UTF-8' > /mnt/etc/locale.conf
 
 arch-chroot /mnt locale-gen
 
-arch-chroot /mnt ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime
+arch-chroot /mnt ln -sf /usr/share/zoneinfo/America/$fshz /etc/localtime
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -99,7 +105,7 @@ sed -i '/%wheel ALL=(ALL) ALL/s/^#//' /mnt/etc/sudoers
 
 arch-chroot /mnt systemctl enable {dhcpcd,NetworkManager} ; clear
 
-if [ -f /mnt/etc/skel/.xinitrc ]; then
+if [ -f /mnt/.gtk ]; then
 cat << EOF > /mnt/temas
 #!/bin/bash
 git clone https://github.com/vinceliuice/Matcha-gtk-theme /tmp/matcha ; cd /tmp/matcha ; sh install.sh -d /usr/share/themes/
@@ -110,7 +116,7 @@ papirus-folders --color teal
 pacman -S --needed --noconfirm arc-icon-theme moka-icon-theme
 EOF
 arch-chroot /mnt sh temas
-rm -f /mnt/temas
+rm -f /mnt/.gtk
 fi
 
 arch-chroot /mnt chown -R $nnu:$nnu /home/$nnu ; arch-chroot /mnt chown -R ${nnu}:${nnu} /home/$nnu
