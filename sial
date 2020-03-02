@@ -83,13 +83,13 @@ wget https://github.com/KittyKatt/screenFetch/raw/master/screenfetch-dev -O /mnt
 wget https://github.com/sivel/speedtest-cli/raw/master/speedtest.py -O /mnt/usr/local/bin/speedtest-cli
 chmod +x /mnt/usr/local/bin/*
 
-clear ; echo 'senha do root '
-arch-chroot /mnt passwd
-
 arch-chroot /mnt groupadd -r autologin
 arch-chroot /mnt useradd -m -g users -G autologin,wheel,storage,power -s /bin/bash $nnu
 
-clear ; echo 'senha do '$nnu' '
+clear ; echo 'senha do root '
+arch-chroot /mnt passwd
+
+echo ; echo 'senha do '$nnu' '
 arch-chroot /mnt passwd $nnu
 arch-chroot /mnt chsh -s /bin/zsh $nnu
 
