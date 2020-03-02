@@ -6,57 +6,44 @@
 
 clear ; echo -e '\t\t\t\tScript de instalacao do Arch Linux \n\nAtive a particao swap e monte as unidades destino antes de continuar... \n'
 
-echo -e "Continuar? [ S ou s = SIM ]" ; read yorn
+echo -n 'Continuar? [ S ou s = SIM ] ' ; read yorn
     if [[ $yorn = [sSyY] ]]; then
     
 trap '' INT TSTP
     
-while true
-    do
-    clear ; echo -n "Digite o nome do usuario: " ; read nn1
-    sleep 1s ; echo -n "Confirme o nome do usuario: " ; read nn2
-    if [[ "$nn1" == *"$nn2"* ]]
-    then
-    break
-    else
-    clear ; echo "Os nomes nao coincidem. Tente novamente! " ; sleep 2s
-    fi
-done
+clear ; echo -n 'Digite o nome do usuario: ' ; read nnu
+echo
+echo -n 'Digite um nome para a maquina (hostname): ' ; read nmq
 
-clear ; echo -n 'Digite um nome para a maquina (hostname): ' ; read nmq
-
-clear ; echo -e "\nDesktop Environment\n-------------------\n\n1) XFCE\t\t2) Mate\t\t3) Plasma\t4) Cinnamon\t5) Nenhum\n" ; echo -n "Escolha [1-5]: " ; read g
+echo -e '\nDesktop Environment\n-------------------\n\n1) XFCE\t\t2) Mate\t\t3) Plasma\t4) Cinnamon\t5) Nenhum\n' ; echo -n 'Escolha [1-5]: ' ; read g
 case $g in
-    1) setde="xfce4" ; mkdir -p /mnt/etc/skel/ ; echo 'exec startxfce4' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    2) setde="mate mate-terminal" ; mkdir -p /mnt/etc/skel/ ; echo 'exec mate-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    3) setde="plasma konsole" ; mkdir -p /mnt/etc/skel/ ; echo 'exec startplasma-x11' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    4) setde="cinnamon gnome-terminal" ; mkdir -p /mnt/etc/skel/ ; echo 'exec cinnamon-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    5) setde=" " ;;
+    1) setde='xfce4 pulseaudio ristretto thunar-archive-plugin xfce4-clipman-plugin xfce4-notifyd xfce4-pulseaudio-plugin xfce4-screensaver xfce4-screenshooter xfce4-whiskermenu-plugin file-roller gnome-calculator' ; mkdir -p /mnt/etc/skel/ ; echo 'exec startxfce4' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
+    2) setde='mate engrampa eom mate-applets mate-calc mate-media mate-power-manager mate-screensaver mate-system-monitor mate-terminal mate-utils' ; mkdir -p /mnt/etc/skel/ ; echo 'exec mate-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
+    3) setde='plasma konsole dolphin ark' ; mkdir -p /mnt/etc/skel/ ; echo 'exec startplasma-x11' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
+    4) setde='cinnamon gnome-terminal file-roller eog gnome-calculator' ; mkdir -p /mnt/etc/skel/ ; echo 'exec cinnamon-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
+    5) setde=' ' ;;
 esac
 
-pacstrap /mnt base base-devel linux linux-firmware linux-headers dhcpcd nano grub xorg-server xorg-xinit xorg-xrandr wget git p7zip unrar gvfs ttf-dejavu zsh networkmanager $setde
+pacstrap /mnt base base-devel linux linux-firmware linux-headers dhcpcd nano grub xorg-server xorg-xinit xorg-xrandr wget git p7zip unrar gvfs ttf-dejavu zsh networkmanager alsa-utils $setde
 
 echo $nmq > /mnt/etc/hostname
 
 sed -i '/pt_BR.UTF-8/,+1 s/^#//' /mnt/etc/locale.gen
 
-echo "LANG=pt_BR.UTF-8" > /mnt/etc/locale.conf
+echo 'LANG=pt_BR.UTF-8' > /mnt/etc/locale.conf
 
 arch-chroot /mnt locale-gen
 
+arch-chroot /mnt ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime
+
 genfstab -U /mnt >> /mnt/etc/fstab
 
-clear ; echo -e "\nGRUB\n----\n\n1) BIOS\t\t\t2) UEFI\t\t\t3) Nao definir\n" ; echo -n "Escolha [1-3]: " ; read g
+clear ; echo -e '\nGRUB\n----\n\n1) BIOS\t\t\t2) UEFI\t\t\t3) Nao definir\n' ; echo -n 'Escolha [1-3]: ' ; read g
 case $g in
     1) clear ; echo -n 'Indique o disco onde o GRUB sera instalado. Ex.: sda, sdb, sdc: ' ; read dgrb ; arch-chroot /mnt grub-install /dev/$dgrb ; arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg ;;
     2) arch-chroot /mnt pacman -S --needed --noconfirm efibootmgr ; arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck ; arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg ;;
     3) break ;;
 esac
-
-#grbb=`lsblk | grep /mnt | sed -n '1p' |cut -c3-5`
-
-
-arch-chroot /mnt tzselect
 
 cat << EOF > /mnt/etc/vconsole.conf
 KEYMAP=br-abnt2
@@ -89,22 +76,26 @@ clear ; echo 'senha do root '
 arch-chroot /mnt passwd
 
 arch-chroot /mnt groupadd -r autologin
-arch-chroot /mnt useradd -m -g users -G autologin,wheel,storage,power -s /bin/bash $nn1
+arch-chroot /mnt useradd -m -g users -G autologin,wheel,storage,power -s /bin/bash $nnu
 
-clear ; echo 'senha do '$nn1' '
-arch-chroot /mnt passwd $nn1
-arch-chroot /mnt chsh -s /bin/zsh $nn1
+clear ; echo 'senha do '$nnu' '
+arch-chroot /mnt passwd $nnu
+arch-chroot /mnt chsh -s /bin/zsh $nnu
 
 sed -i '/%wheel ALL=(ALL) ALL/s/^#//' /mnt/etc/sudoers
 
-arch-chroot /mnt systemctl enable dhcpcd
-arch-chroot /mnt systemctl enable NetworkManager
+arch-chroot /mnt systemctl enable {dhcpcd,NetworkManager}
+
+arch-chroot /mnt git clone https://github.com/vinceliuice/Matcha-gtk-theme /tmp/matcha ; cd /tmp/matcha ; sh install.sh -d /usr/share/themes/
+arch-chroot /mnt wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install.sh | sh
+arch-chroot /mnt wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/install.sh | sh
+arch-chroot /mnt papirus-folders --color teal
+
+arch-chroot /mnt chown -R $nnu:$nnu /home/$nnu ; arch-chroot /mnt chown -R ${nnu}:${nnu} /home/$nnu
 
 arch-chroot /mnt pacman -Sc --noconfirm
 
-arch-chroot /mnt chown -R $nn1:$nn1 /home/$nn1 ; arch-chroot /mnt chown -R ${nn1}:${nn1} /home/$nn1
-
-clear ; echo -e "Instalacao concluida. Reiniciar? [ S ou s = SIM ]" ; read yorn
+clear ; echo -e 'Instalacao concluida. Reiniciar? [ S ou s = SIM ]' ; read yorn
     if [[ $yorn = [sSyY] ]]; then
     umount -R /mnt && reboot
     fi
