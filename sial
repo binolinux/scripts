@@ -12,7 +12,7 @@ echo -n 'Continuar? [ S ou s = SIM ] ' ; read yorn
 trap '' INT TSTP
 
 	if [ -d /mnt/var/cache/pacman/pkg ]; then
-	echo ; echo -n 'Deseja reutilizar o cache da instalacao anterior ? (recomendado) [ S ou s = SIM ] ' ; read pcial
+	echo ; echo -n 'Deseja reutilizar o cache da instalacao anterior ? [ S ou s = SIM ] ' ; read pcial
 	if [[ $pcial = [sSyY] ]]; then
 	echo -e '\nAguarde... \n'
 	mv /mnt/var/cache/pacman/pkg /mnt/.p
