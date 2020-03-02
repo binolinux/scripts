@@ -32,10 +32,12 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 clear ; echo -e "\nGRUB\n----\n\n1) BIOS\t\t\t2) UEFI\t\t\t3) Nao definir\n" ; echo -n "Escolha [1-3]: " ; read g
 case $g in
-    1) grbb=`lsblk | grep /mnt | sed -n '1p' |cut -c3-5` ; arch-chroot /mnt grub-install /dev/$grbb ; arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg ;;
+    1) arch-chroot /mnt grub-install /dev/sda ; arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg ;;
     2) arch-chroot /mnt pacman -S --needed --noconfirm efibootmgr ; arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck ; arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg ;;
     3) break ;;
 esac
+
+#grbb=`lsblk | grep /mnt | sed -n '1p' |cut -c3-5`
 
 echo "archlinux" > /mnt/etc/hostname
 
