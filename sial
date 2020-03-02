@@ -27,13 +27,12 @@ clear ; echo -n 'Digite um nome para a maquina (hostname): ' ; read nmq
 
 clear ; echo -e "\nDesktop Environment\n-------------------\n\n1) XFCE\t\t2) Mate\t\t3) Plasma\t4) Cinnamon\t5) Nenhum\n" ; echo -n "Escolha [1-5]: " ; read g
 case $g in
-    1) setde="xfce4" ; mkdir -p /mnt/etc/skel/ ; echo 'exec startxfce4' >> /mnt/etc/skel/.xinitrc ; echo echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    2) setde="mate mate-terminal" ; mkdir -p /mnt/etc/skel/ ; echo 'exec mate-session' >> /mnt/etc/skel/.xinitrc ; echo echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    3) setde="plasma konsole" ; mkdir -p /mnt/etc/skel/ ; echo 'exec startplasma-x11' >> /mnt/etc/skel/.xinitrc ; echo echo 'startx' >> /mnt/etc/skel/.zprofile ;;
-    4) setde="cinnamon gnome-terminal" ; mkdir -p /mnt/etc/skel/ ; echo 'exec cinnamon-session' >> /mnt/etc/skel/.xinitrc ; echo echo 'startx' >> /mnt/etc/skel/.zprofile ;;
+    1) setde="xfce4" ; mkdir -p /mnt/etc/skel/ ; echo 'exec startxfce4' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
+    2) setde="mate mate-terminal" ; mkdir -p /mnt/etc/skel/ ; echo 'exec mate-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
+    3) setde="plasma konsole" ; mkdir -p /mnt/etc/skel/ ; echo 'exec startplasma-x11' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
+    4) setde="cinnamon gnome-terminal" ; mkdir -p /mnt/etc/skel/ ; echo 'exec cinnamon-session' >> /mnt/etc/skel/.xinitrc ; echo 'startx' >> /mnt/etc/skel/.zprofile ;;
     5) setde=" " ;;
 esac
-clear
 
 pacstrap /mnt base base-devel linux linux-firmware linux-headers dhcpcd nano grub xorg-server xorg-xinit xorg-xrandr wget git p7zip unrar gvfs ttf-dejavu zsh networkmanager $setde
 
