@@ -1,0 +1,8 @@
+#!/bin/bash
+# instala surf browser
+git clone https://git.suckless.org/surf
+wget https://github.com/binolinux/misc/raw/master/docs/surf-browser-config.h -O /tmp/surf/config.h
+cd /tmp/surf
+sudo make clean install
+cd $HOME
+exit
