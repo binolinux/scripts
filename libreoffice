@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# script libreoffice appimage
+# argumentos -b, -c, -d, -m, -w
+# exemplos: 
+# libreoffice -b --> base
+# libreoffice -c --> calc
+# libreoffice -d --> draw
+# libreoffice -i --> impress
+# libreoffice -m --> math
+# libreoffice -s --> startcenter
+# libreoffice -w --> writer
+# contato telegram: @rocker_racoon
+
+# opcoes
+while getopts ":bcdimsw" option;
+do
+case $option in
+	b)
+	/opt/libreoffice/libreoffice --base
+	;;
+	c)
+	/opt/libreoffice/libreoffice --calc
+	;;
+	d)
+	/opt/libreoffice/libreoffice --draw
+	;;
+	i)
+	/opt/libreoffice/libreoffice --impress
+	;;
+	m)
+	/opt/libreoffice/libreoffice --math
+	;;
+	s)
+	/opt/libreoffice/libreoffice
+	;;
+	w)
+	/opt/libreoffice/libreoffice --writer
+	;;
+esac
+done
+
+exit
