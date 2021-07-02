@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# instala o basilisk browser
+sudo rm -rf /opt/basilisk /usr/local/bin/basilisk /usr/share/applications/basilisk.desktop
+cd /tmp ; wget http://us.basilisk-browser.org/release/basilisk-latest.linux64.tar.xz -O basilisk.tar.xz  ; sudo tar -xJf basilisk.tar.xz -C /opt
+echo -e '[Desktop Entry]\nVersion=1.0\nName=Basilisk Web Browser\nComment=Browse the World Wide Web\nKeywords=Internet;WWW;Browser;Web;Explorer\nExec=basilisk %u\nTerminal=false\nX-MultipleArgs=false\nType=Application\nIcon=basilisk\nCategories=Network;WebBrowser;Internet\nMimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/x-xpinstall;\nStartupNotify=true' | sudo tee /usr/share/applications/basilisk.desktop
+sudo cp /opt/basilisk/browser/icons/mozicon128.png /usr/share/pixmaps/basilisk.png
+sudo ln -sf /opt/basilisk/basilisk /usr/local/bin/ ; sudo chown -R $USER:$USER /opt/basilisk ; sudo chown -R ${USER}:${USER} /opt/basilisk ; clear ; cd $HOME
+cd $HOME
+exit
